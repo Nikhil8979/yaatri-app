@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Head from "next/head";
 import { Carousel, CarouselItem } from "react-bootstrap";
+import Features from "./Features";
 const RoomDetails = () => {
   const { room, error } = useSelector((state) => state.roomDetail);
   console.log(room, "[----r room ");
@@ -54,31 +55,7 @@ const RoomDetails = () => {
             <h3>Description</h3>
             <p>{room?.description}</p>
 
-            <div className="features mt-5">
-              <h3 className="mb-4">Features:</h3>
-              <div className="room-feature">
-                <i className="fa fa-cog fa-fw fa-users" aria-hidden="true"></i>
-                <p>6 Guests</p>
-              </div>
-
-              <div className="room-feature">
-                <i className="fa fa-cog fa-fw fa-bed" aria-hidden="true"></i>
-                <p>2 Beds</p>
-              </div>
-
-              <div className="room-feature">
-                <i className="fa fa-cog fa-fw fa-bath" aria-hidden="true"></i>
-                <p>2 Baths</p>
-              </div>
-
-              <div className="room-feature">
-                <i
-                  className="fa fa-cog fa-fw fa-cutlery"
-                  aria-hidden="true"
-                ></i>
-                <p>Kitchen</p>
-              </div>
-            </div>
+            <Features room={room} />
           </div>
 
           <div className="col-12 col-md-6 col-lg-4">

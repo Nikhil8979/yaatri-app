@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "../../components/layout/Layout";
-import RoomDetails from "../../components/RoomDetails";
+import RoomDetails from "../../components/room/RoomDetails";
 import { wrapper } from "../../redux/store";
 import { getRoomDetails, getRooms } from "../../redux/actions/roomActions";
 

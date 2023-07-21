@@ -456,10 +456,10 @@ input::placeholder {
 .page-link {
   color: #e61e4d;
 }
-
+/* 
 .page-link:hover {
   color: #e61e4d;
-}
+} */
 
 /* Booking Details */
 .booking-details p {
