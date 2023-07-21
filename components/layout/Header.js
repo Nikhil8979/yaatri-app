@@ -1,18 +1,21 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 export const Header = () => {
   return (
     <nav className="navbar row justify-content-center sticky-top">
       <div className="container">
         <div className="col-3 p-0">
           <div className="navbar-brand">
-            <Image
-              style={{ cursor: "pointer" }}
-              src="/../public/images/bookit_logo.png"
-              alt="BookIT"
-              width={100}
-              height={40}
-            />
+            <Link href="/">
+              <Image
+                style={{ cursor: "pointer" }}
+                src="/../public/images/bookit_logo.png"
+                alt="BookIT"
+                width={100}
+                height={40}
+              />
+            </Link>
           </div>
         </div>
 

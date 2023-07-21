@@ -4,7 +4,7 @@ const nextConfig = {
     DB_LOCAL_URI: "mongodb://localhost:27017/yaatri-app",
   },
   images: {
-    domains: ["a0.muscache.com"],
+    domains: ["a0.muscache.com", "res.cloudinary.com", "picsum.photos"],
   },
 };
 
