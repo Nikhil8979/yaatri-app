@@ -6,13 +6,14 @@ import { toast } from "react-toastify";
 import { clearErrors } from "../redux/actions/roomActions";
 import Pagination from "react-js-pagination";
 import { useRouter } from "next/router";
+import Link from "next/link";
 export const Home = () => {
   const { rooms, error, resPerPage, roomsCount } = useSelector(
     (state) => state.allRooms
   );
   const dispatch = useDispatch();
   const router = useRouter();
-  let { page } = router.query;
+  let { page, location } = router.query;
   page = Number(page);
   useEffect(() => {
     if (error) {
@@ -21,24 +22,36 @@ export const Home = () => {
     }
   }, []);
 
+  let queryParams;
+  if (typeof window !== "undefined") {
+    queryParams = new URLSearchParams(window.location.search);
+  }
   const handlePagination = (currentPage) => {
-    router.push(`/?page=${currentPage}`);
+    if (queryParams.has("page")) {
+      queryParams.set("page", currentPage);
+    } else {
+      queryParams.append("page", currentPage);
+    }
+    router.replace({
+      search: queryParams.toString(),
+    });
   };
 
   return (
     <>
       <section id="rooms" className="container mt-5">
-        <h2 className="mb-3 ml-2 stays-heading">Stays in New York</h2>
+        <h2 className="mb-3 ml-2 stays-heading">
+          {location ? `Rooms in ${location}` : "All Rooms"}
+        </h2>
 
-        <a href="#" className="ml-2 back-to-search">
-          {" "}
+        <Link href={"/search"} className="ml-2 back-to-search">
           <i className="fa fa-arrow-left"></i> Back to Search
-        </a>
+        </Link>
         <div className="row">
           {rooms?.length ? (
             rooms?.map((room) => <RoomItem key={room._id} room={room} />)
           ) : (
-            <div className="alert alert-danger">
+            <div className="alert alert-danger w-100 mt-3">
               <b>No Room.</b>
             </div>
           )}
