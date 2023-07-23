@@ -8,11 +8,11 @@ import {
 } from "../constants/roomConstants";
 
 export const getRooms =
-  (req, currentPage = 1) =>
+  (req, currentPage = 1, location, guests, category) =>
   async (dispatch) => {
     try {
       const { data } = await axios.get(
-        `http://localhost:7000/api/retrieve/rooms?page=${currentPage}`
+        `http://localhost:7000/api/retrieve/rooms?page=${currentPage}&location=${location}&guests=${guests}&category=${category}`
       );
       dispatch({
         type: ALL_ROOMS_SUCCESS,
