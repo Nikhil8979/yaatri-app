@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import ButtonLoader from "../layout/ButtonLoader";
 import { CLEAR_ERRORS } from "../../redux/constants/roomConstants";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,10 +13,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  const { error, success, a } = useSelector((state) => state.user);
-
-  console.log(a, "-ersdfa");
-  if (!!a) {
+  const { error, user } = useSelector((state) => state.user);
+  if (!!user) {
     router.push("/");
   }
   useEffect(() => {
@@ -26,7 +25,7 @@ const Login = () => {
         error: null,
       });
     }
-  }, [error, success, a, dispatch]);
+  }, [error, user, dispatch]);
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -77,9 +76,9 @@ const Login = () => {
               {loading ? <ButtonLoader /> : "LOGIN"}
             </button>
 
-            <a href="#" class="float-right mt-3">
+            <Link href={"/register"} class="float-right mt-3">
               New User?
-            </a>
+            </Link>
           </form>
         </div>
       </div>
