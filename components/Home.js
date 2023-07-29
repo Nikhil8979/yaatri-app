@@ -11,6 +11,7 @@ export const Home = () => {
   const { rooms, error, resPerPage, roomsCount } = useSelector(
     (state) => state.allRooms
   );
+
   const dispatch = useDispatch();
   const router = useRouter();
   let { page, location } = router.query;
@@ -20,7 +21,7 @@ export const Home = () => {
       toast.error(error);
       dispatch(clearErrors());
     }
-  }, []);
+  }, [error, dispatch]);
 
   let queryParams;
   if (typeof window !== "undefined") {
