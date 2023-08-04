@@ -15,7 +15,7 @@ const Login = () => {
   const router = useRouter();
   const { error, user } = useSelector((state) => state.user);
   if (!!user) {
-    router.push("/");
+    window.location.href = "/";
   }
   useEffect(() => {
     if (error) {
