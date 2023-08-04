@@ -10,4 +10,19 @@ const login = () => {
   );
 };
 
+export const getServerSideProps = (context) => {
+  const token = context.req.headers.cookie.split("token=")[1];
+  if (token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+};
+
 export default login;
