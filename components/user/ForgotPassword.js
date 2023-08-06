@@ -1,0 +1,56 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { clearErrors } from "../../redux/actions/roomActions";
+import { forgotPassword } from "../../redux/actions/userAction";
+import ButtonLoader from "../layout/ButtonLoader";
+
+const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const { error, loading, message } = useSelector((state) => state.forgot);
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(clearErrors());
+    }
+    if (message) {
+      toast.success(message);
+    }
+  }, [error, message, dispatch]);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const userData = { email };
+    dispatch(forgotPassword(userData));
+  };
+  return (
+    <div className="row wrapper">
+      <div className="col-10 col-lg-5">
+        <form className="shadow-lg" onSubmit={submitHandler}>
+          <h1 className="mb-3">Forgot Password</h1>
+          <div className="form-group">
+            <label htmlFor="email_field">Enter Email</label>
+            <input
+              type="email"
+              id="email_field"
+              className="form-control"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+          </div>
+
+          <button
+            id="forgot_password_button"
+            type="submit"
+            disabled={loading ? true : false}
+            className="btn btn-block py-3"
+          >
+            {loading ? <ButtonLoader /> : "SEND EMAIL"}
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default ForgotPassword;

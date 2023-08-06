@@ -9,10 +9,15 @@ import { useRouter } from "next/router";
 const token = getCookie("token");
 export const Header = () => {
   const dispatch = useDispatch();
-  const { user, loading } = useSelector((state) => state.auth);
-
+  const router = useRouter();
+  const { user, loading, error } = useSelector((state) => state.auth);
   function deleteCookie(name) {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+  console.log(error, "---yu ser");
+  if (error === 401) {
+    deleteCookie("token");
+    router.push("/login");
   }
   useEffect(() => {
     dispatch(checkUserLogin(token));
@@ -57,7 +62,9 @@ export const Header = () => {
                 className="dropdown-menu"
                 aria-labelledby="dropDownMenuButton"
               >
-                {/* <Link href="/"> */}
+                <Link href="/me/update">
+                  <span className="dropdown-item text-danger">My Profile</span>
+                </Link>
                 <span
                   onClick={() => {
                     deleteCookie("token");
@@ -68,6 +75,7 @@ export const Header = () => {
                 >
                   Logout
                 </span>
+
                 {/* </Link> */}
               </div>
             </div>
